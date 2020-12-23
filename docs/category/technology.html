@@ -56,22 +56,13 @@ RenaissanceNow            </a>
                             <a href="/category/autobiography.html">Autobiography</a>
                         </li>
                         <li >
-                            <a href="/category/barrie.html">Barrie</a>
-                        </li>
-                        <li >
                             <a href="/category/barrie-church-crawl.html">Barrie church crawl</a>
-                        </li>
-                        <li >
-                            <a href="/category/bookreviews.html">Bookreviews</a>
                         </li>
                         <li >
                             <a href="/category/commentary.html">Commentary</a>
                         </li>
                         <li >
                             <a href="/category/economics.html">Economics</a>
-                        </li>
-                        <li >
-                            <a href="/category/links.html">Links</a>
                         </li>
                         <li >
                             <a href="/category/misc.html">Misc</a>
@@ -92,19 +83,13 @@ RenaissanceNow            </a>
                             <a href="/category/religion.html">Religion</a>
                         </li>
                         <li >
-                            <a href="/category/sabbatical.html">Sabbatical</a>
+                            <a href="/category/reviews.html">Reviews</a>
                         </li>
                         <li >
                             <a href="/category/sport.html">Sport</a>
                         </li>
                         <li class="active">
                             <a href="/category/technology.html">Technology</a>
-                        </li>
-                        <li >
-                            <a href="/category/technology_toolkit.html">Technology_toolkit</a>
-                        </li>
-                        <li >
-                            <a href="/category/uncategorized.html">Uncategorized</a>
                         </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -118,7 +103,7 @@ RenaissanceNow            </a>
 <!-- End Banner -->
 <div class="container">
     <div class="row">
-        <div class="col-sm-9">
+        <div class="col-lg-12">
             <article>
                 <h2><a href="/2015/02/25/privacy-and-duty/">Privacy and Duty</a></h2>
                 
@@ -244,6 +229,100 @@ Under EU law, personal data can only be gathered legally under strict conditions
             </article>
             <hr/>
             <article>
+                <h2><a href="/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/">What’s in my files?  Heads, tails, cats and more.</a></h2>
+                
+                
+                <div class="entry-content">
+
+                    
+        
+<p>As soon as you start working on the Linux command line, you have to start working with files.  Linux follows a very powerful design philosophy expressed as <em>everything is a file. </em>This can take some getting used to, but is incredibly useful once you get it.  Because once you’ve learned how to read and manipulate text files, you can do pretty much anything on your machine.</p>
+<p>The first command you need to know is <code>cat</code>. Cat is short for ‘concatenate’, and is used for writing text to and from files. So if I have a file in my current working directory, I can get its contents with cat:</p>
+<pre><code><span id="more-1058"></span>
+$ echo "hello world" &gt; myfile.txt
+$ cat myfile.txt 
+hello world
+</code></pre>
+<p>The first line created the file <code>myfile.txt</code> and directed the string “hello world” into it. The second line used <code>cat</code> to read the contents of the file.</p>
+<p>Here’s a more real-world example</p>
+<pre><code>$ cat /var/log/syslog</code></pre>
+<p>This prints out all the lines in the <code>syslog</code> file, present on most unix systems. Don’t worry too much about the contents of the file, it’s probably mostly log records from your system booting up. Now, if you’re inspecting a log file, very often you only want the last few lines, rather than the entire thing. Linux provides a useful command for this very purpose</p>
+<pre><code>$ tail /var/log/syslog</code></pre>
+<p>Tail, as you might guess, prints out the ‘tail’, or last few lines, of a file. Its companion is <code>head</code>, which prints the first few lines</p>
+<pre><code>$ head /var/log/syslog</code></pre>
+<p>If you want the ability to view large amounts of text and scroll through it, then the command you want is ‘<code>less</code>‘.</p>
+<pre><code>$ less /var/log/syslog</code></pre>
+<p>This allows you to scroll up and down through your file. Press <b>q</b> to return to the command line.</p>
+<p>Here’s one last neat little trick. I mentioned that on Linux, <i>everything is a file</i>. Even the state of the system is represented as a file.</p>
+<pre><code>
+trevor@vm2:~$ cat /proc/cpuinfo 
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 70
+model name	: Intel(R) Core(TM) i7-4850HQ CPU @ 2.30GHz
+stepping	: 1
+microcode	: 0xf
+cpu MHz		: 2294.218
+cache size	: 6144 KB
+...
+</code></pre>
+<p>Rather than having many different tools for different tasks, a Linux system is more like a box of Lego. The same tools can be plugged into all sorts of different places to enable you to do what you want. I use the humble <code>cat</code> command on a daily basis to modify system settings, read files, and even monitor the health of my machines.</p>
+<p>Read the rest of my ‘technology toolkit’ posts:</p>
+<ul class="lcp_catlist" id="lcp_instance_0"><li class="current"><a href="http://renaissancenow.ca/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/" title="What’s in my files?  Heads, tails, cats and more.">What’s in my files?  Heads, tails, cats and more.</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/" title="What are my servers doing?  ping, mtr and nmap">What are my servers doing?  ping, mtr and nmap</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/top-and-friends-whats-going-on-on-my-system/" title="‘top’ and friends – what’s going on on my system?">‘top’ and friends – what’s going on on my system?</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get: Making your ubuntu machine more better</a> </li></ul>
+
+    
+                    
+                </div>  
+                
+                
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/">apt-get: Making your ubuntu machine more better</a></h2>
+                
+                
+                <div class="entry-content">
+
+                    
+        
+<p>I pretty much live on the Linux command line.  There’s a number of tools I have in my ‘toolkit’ that I use on a daily basis to automate tasks, manage systems and provide features.</p>
+<p><code>apt-get</code> is one of the most important tools to understand if you’re using an Ubuntu distribution.</p>
+<p><code>apt-get</code> is like the Apple App Store, except it’s been around for much longer and everything it provides is absolutely free. When I’m setting up a new Linux machine I immediately download and install several useful packages.</p>
+<pre><code>
+$ sudo apt-get install ipython
+$ sudo apt-get install nmap
+$ sudo apt-get install mercurial
+</code></pre>
+<p>and so on.  Very quickly your new Linux machine can be a database server, a graphic design workstation, or a development engine.</p>
+<p><span id="more-1022"></span>Several apt-get commands are worth knowing</p>
+<p><img alt="photo" class="alignright size-thumbnail wp-image-1029" height="150" sizes="(max-width: 150px) 100vw, 150px" src="/images/2013/11/photo-150x150.png" srcset="/images/2013/11/photo-150x150.png 150w, /images/2013/11/photo-300x300.png 300w, /images/2013/11/photo.png 512w" width="150" /></p>
+<p><code>$ apt-get install nmap</code>, for example, installs a powerful port-scanner.</p>
+<p><code>$ apt-get remove nmap</code> removes the package we just installed.</p>
+<p><code>$ apt-get upgrade</code> upgrades all installed packages to the latest version</p>
+<p>Even more powerfully,</p>
+<p><code>$ do-release-upgrade </code>upgrades your Ubuntu system when a new one is released.   To find out what version of Ubuntu you’re running, I suggest <code>$ lsb_release</code>. On my machine it gives the following output:</p>
+<pre><code>$ lsb_release -a
+No LSB modules are available.
+Distributor ID: Ubuntu
+Description: Ubuntu 13.10
+Release: 13.10
+Codename: saucy</code></pre>
+<p>Check <a href="http://www.ubuntu.com/" title="ubuntu.com">http://www.ubuntu.com/</a> to see what the latest release version is.</p>
+<p>Have fun!</p>
+<p> </p>
+<p> </p>
+<h3>More Technology Toolkit Posts</h3>
+<ul class="lcp_catlist" id="lcp_instance_0"><li><a href="http://renaissancenow.ca/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/" title="What’s in my files?  Heads, tails, cats and more.">What’s in my files?  Heads, tails, cats and more.</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/" title="What are my servers doing?  ping, mtr and nmap">What are my servers doing?  ping, mtr and nmap</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/top-and-friends-whats-going-on-on-my-system/" title="‘top’ and friends – what’s going on on my system?">‘top’ and friends – what’s going on on my system?</a> </li><li class="current"><a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get: Making your ubuntu machine more better</a> </li></ul>
+
+    
+                    
+                </div>  
+                
+                
+            </article>
+            <hr/>
+            <article>
                 <h2><a href="/2013/11/28/top-and-friends-whats-going-on-on-my-system/">‘top’ and friends – what’s going on on my system?</a></h2>
                 
                 
@@ -287,6 +366,53 @@ $ sudo iftop</code></pre>
 <p>which means ‘show me all the processes on this machine that are listening for TCP/IP connections, and which port they are listening on’. This is very helpful when you’re setting up a machine and you want to verify that, say, your webserver or database server is running correctly.</p>
 <p>Linux gives you many, many ways to see what’s going on on your system, and we’ve only scratched the surface her. Check out the rest of my technology toolkit posts:</p>
 <ul class="lcp_catlist" id="lcp_instance_0"><li><a href="http://renaissancenow.ca/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/" title="What’s in my files?  Heads, tails, cats and more.">What’s in my files?  Heads, tails, cats and more.</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/" title="What are my servers doing?  ping, mtr and nmap">What are my servers doing?  ping, mtr and nmap</a> </li><li class="current"><a href="http://renaissancenow.ca/2013/11/28/top-and-friends-whats-going-on-on-my-system/" title="‘top’ and friends – what’s going on on my system?">‘top’ and friends – what’s going on on my system?</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get: Making your ubuntu machine more better</a> </li></ul>
+
+    
+                    
+                </div>  
+                
+                
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/">What are my servers doing?  ping, mtr and nmap</a></h2>
+                
+                
+                <div class="entry-content">
+
+                    
+        
+<p>If you’re a network administrator or web developer of any kind, you are often going to want to know what your machines are doing.  Is your database machine connected to the network?  Is your firewall working?  Is your web server properly configured?</p>
+<p><code>ping</code> is the very first tool that we reach for.<br />
+<span id="more-1051"></span><br />
+  <code>ping</code> simply sends a message to another machine to see if it is responding.</p>
+<pre><code>$ ping google.com</code></pre>
+<p>When you run this, you should start seeing responses from google.com getting printed out at your command line. If you don’t get this, then your network connection is probably down. This can also be used to see if machines that you own are up and running.</p>
+<pre><code>$ ping mywebserver</code></pre>
+<p>If <code>ping</code> doesn’t work, and you’re sure that you are connected to the network, the next thing to do is to make sure that you have the right machine name and that your client machine can look up its IP address correctly. That’s where <code>dig</code> comes in.</p>
+<pre><code>$ dig mycoolsite.ca </code></pre>
+<p>Check that this gives you the right IP address. Be aware that some DNS providers such as <a href="http://www.opendns.com/">OpenDNS</a> may give you back an IP address even for sites that don’t exist, but it won’t be anything useful.</p>
+<p><code>mtr</code> is like <code>ping</code> on steroids – it will show you all the hops that your network packets are taking between you and your target machine, and how responsive each intermediate machine is being. This is a very handy tool for analysing connectivity problems.</p>
+<h4>My server is up, but what is it doing?</h4>
+<p><code>nmap</code> is a vital tool in every network administrators toolkit. It deserves an article all to itself, but here’s a quick taste:</p>
+<pre><code>trevor@vm2:~$ nmap localhost 
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2013-11-28 18:00 PST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000094s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+5432/tcp open  postgresql
+
+Nmap done: 1 IP address (1 host up) scanned in 0.04 seconds
+</code></pre>
+<p>This tells me that machine <b>vm2</b> is running ssh, a webserver, and the postgresql database engine. If this machine was visible to the outside world, now would be the time when I would make sure that postgresql wasn’t accepting non-local connections.</p>
+<p>As with all these tools, nmap can be installed via</p>
+<pre><code>$ sudo apt-get install nmap</code></pre>
+<p>Find out how to install packages, keep an eye on your Linux system and other useful tips in my technology toolkit posts:</p>
+<ul class="lcp_catlist" id="lcp_instance_0"><li><a href="http://renaissancenow.ca/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/" title="What’s in my files?  Heads, tails, cats and more.">What’s in my files?  Heads, tails, cats and more.</a> </li><li class="current"><a href="http://renaissancenow.ca/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/" title="What are my servers doing?  ping, mtr and nmap">What are my servers doing?  ping, mtr and nmap</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/top-and-friends-whats-going-on-on-my-system/" title="‘top’ and friends – what’s going on on my system?">‘top’ and friends – what’s going on on my system?</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get: Making your ubuntu machine more better</a> </li></ul>
 
     
                     
@@ -414,78 +540,6 @@ properties hstore
                 
             </article>
             <hr/>
-            <article>
-                <h2><a href="/2013/03/02/online-development-tools/">Online Development Tools</a></h2>
-                
-                
-                <div class="entry-content">
-
-                    
-        
-<p>A couple of really neat tools caught my eye this week.</p>
-<p><a href="http://www.tryfsharp.org/Learn/getting-started">Try F#</a> – F# is a functional language built on top of Microsoft’s CLR, drawing on languages like Haskell and O’Caml.  Every language should have a site like this, it’s a great way to explore the syntax and start getting your head wrapped around the design philosophy.</p>
-<p><a href="http://sqlfiddle.com/">SQLFiddle</a> – A brilliant little tool that allows you to create a SQL database schema and execute queries against it directly in your browser.  It supports Microsoft SQL Server, MySQL, Postgres and Oracle.  It even gives you a nice query planner output to help you understand the cost of your query.  If you choose Postgres, it provides you with a direct link to <a href="http://explain.depesz.com/">http://explain.depesz.com</a>, a neat tool for visualising the output of the Postgres EXPLAIN command.</p>
-<p>Postges provides some very powerful mechanisms for profiling and optimizing your queries, but they can be a little arcane to get started with.  These tools could really help speed up your workflow.</p>
-<p>SQLFiddle is clearly inspired by <a href="http://jsfiddle.net/">JSFiddle</a>, a tool I’ve used for the last year or so for trying out short snippets of javascript and sharing them with others.  It automatically gives you access to popular javascript libraries such as jQuery, and allows you to quickly prototype HTML, CSS, javascript and even <a href="http://jashkenas.github.com/coffee-script/">Coffeescript</a> with zero setup costs.</p>
-
-    
-                    
-                </div>  
-                
-                
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/2012/11/14/gimp-paint-studio/">Gimp Paint Studio</a></h2>
-                
-                
-                <div class="entry-content">
-
-                    
-        
-<p>How did I not know about <a href="http://code.google.com/p/gps-gimp-paint-studio/">Gimp Paint Studio</a> before today?  This is a stunning collection of brushes, textures and most importantly, tool presets.<a href="/images/2012/11/Untitled.jpg"><img alt="" class="aligncenter size-large wp-image-628" height="306" sizes="(max-width: 500px) 100vw, 500px" src="/images/2012/11/Untitled-1024x628.jpg" srcset="/images/2012/11/Untitled-1024x628.jpg 1024w, /images/2012/11/Untitled-300x184.jpg 300w, /images/2012/11/Untitled-800x491.jpg 800w, /images/2012/11/Untitled.jpg 1059w" title="Untitled" width="500" /></a></p>
-<p>This takes GIMP from merely being an incredibly powerful image editor to being an incredibly powerful painting tool, as well.  I’ve played around with it for an hour, and I’m loving it already.</p>
-
-    
-                    
-                </div>  
-                
-                
-            </article>
-            <hr/>
-            <article>
-                <h2><a href="/2012/11/08/lots-of-intriguinging-scheme-parentheses/">Lots of Intriguinging Scheme Parentheses.</a></h2>
-                
-                
-                <div class="entry-content">
-
-                    
-        
-<p>The venerable image manipulation package GIMP still continues to surprise me.</p>
-<p>Version 2.8 was released recently, and it can now run seamlessly on OSX, without the need for XServer.</p>
-<p>One feature I hadn’t explored until yesterday is the built in scripting facilities.  Pretty much anything you can do in GIMP can be scripted and programmed.  This being open source software, there is of course more than one scripting language available.  Python is available via the Python-Fu menu, but the default scripting language is Scheme, a variant of LISP.</p>
-<p><a href="/images/2012/11/scheme.png"><img alt="" class="aligncenter size-large wp-image-624" height="326" sizes="(max-width: 500px) 100vw, 500px" src="/images/2012/11/scheme-1024x669.png" srcset="/images/2012/11/scheme-1024x669.png 1024w, /images/2012/11/scheme-300x196.png 300w, /images/2012/11/scheme-800x523.png 800w, /images/2012/11/scheme.png 1176w" title="scheme" width="500" /></a></p>
-<p>This is my first real adventure into the world of LISP dialects.  It fascinates me how so many language constructs can be made available using only one syntactic structure – the bracket.</p>
-<p>LISP has sometimes been said to stand for ‘Lots of Irritating Silly Parentheses.’</p>
-<p>But I find this fascinating.</p>
-<p>We use brackets for function calls:<code></code></p>
-<pre><code>(myfunction arg1 arg2)</code></pre>
-<p>We use brackets to <em>define</em> functions</p>
-<pre><code>(define (AddXY inX inY) (+ inX inY) )</code></pre>
-<p>and we even use brackets to manage the scope of variables</p>
-<pre><code>(let* ( (a 1) (b 2) ) (AddXY a b))</code></pre>
-<p>Which evaluates to ‘3’.</p>
-<p>In any other language I’ve used, such as C, or Python, or Javascript, those three different semantic constructs would use three different syntactic structures – curly brackets, keywords, indentation etc.</p>
-<p>I can see why people find LISP and Scheme hard to fathom, but it has a certain elegance that appeals to me.</p>
-<p> </p>
-
-    
-                    
-                </div>  
-                
-                
-            </article>
-            <hr/>
 
         <ul class="pagination">
                 <li class="prev disabled"><a href="#">&laquo;</a></li>
@@ -496,39 +550,6 @@ properties hstore
                 <li class="next"><a
                         href="/category/technology2.html">&raquo;</a></li>
         </ul>
-        </div>
-        <div class="col-sm-3" id="sidebar">
-            <aside>
-
-<section class="well well-sm">
-    <ul class="list-group list-group-flush">
-            <li class="list-group-item"><h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
-              <ul class="list-group" id="social">
-                <li class="list-group-item"><a href="https://twitter.com/trvrm"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
-              </ul>
-            </li>
-
-
-
-
-
-    <li class="list-group-item"><h4><i class="fa fa-external-link-square fa-lg"></i><span class="icon-label">Links</span></h4>
-      <ul class="list-group" id="links">
-        <li class="list-group-item">
-            <a href="https://getpelican.com/" target="_blank">
-                Pelican
-            </a>
-        </li>
-        <li class="list-group-item">
-            <a href="https://www.python.org/" target="_blank">
-                Python.org
-            </a>
-        </li>
-      </ul>
-    </li>
-    </ul>
-</section>
-            </aside>
         </div>
     </div>
 </div>

@@ -26,12 +26,13 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+HIDE_SIDEBAR=True
 # Blogroll
-LINKS = (('Pelican', 'https://getpelican.com/'),
-         ('Python.org', 'https://www.python.org/'),)
-
-# Social widget
-SOCIAL = (('twitter', 'https://twitter.com/trvrm',),)
+# LINKS = (('Pelican', 'https://getpelican.com/'),
+#          ('Python.org', 'https://www.python.org/'),)
+# 
+# # Social widget
+# SOCIAL = (('twitter', 'https://twitter.com/trvrm',),)
 
 DEFAULT_PAGINATION = 10
 
@@ -46,3 +47,5 @@ DISPLAY_ARTICLE_ON_INDEX=True
 
 STATIC_PATHS = ['images', 'extra/CNAME']
 EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'},}
+
+BOOTSTRAP_NAVBAR_INVERSE=False
