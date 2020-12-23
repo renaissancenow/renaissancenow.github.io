@@ -1,0 +1,33 @@
+
+    <html>
+    <head>
+        <title>Coffeescript</title>
+        <meta name="date" content="2011-08-13" />
+        
+        <meta name="category" content="Technology" />
+        <meta name="tags" content="Technology" />
+        <meta name="author" content="Trevor" />
+        
+    
+    </head>
+    <body>
+        
+<p><a href="/images/2011/08/810_16_6603-Cup-Of-Coffee_web.jpg"><img alt="" class="alignright size-medium wp-image-108" height="201" sizes="(max-width: 300px) 100vw, 300px" src="/images/2011/08/810_16_6603-Cup-Of-Coffee_web-300x201.jpg" srcset="/images/2011/08/810_16_6603-Cup-Of-Coffee_web-300x201.jpg 300w, /images/2011/08/810_16_6603-Cup-Of-Coffee_web-447x300.jpg 447w, /images/2011/08/810_16_6603-Cup-Of-Coffee_web.jpg 600w" title="Cup Of Coffee" width="300"/></a>New technology of the week, and hot contender for the title of ‘my current favourite language’, is <a href="http://jashkenas.github.com/coffee-script/">coffeescript</a>.</p>
+<p>I’ve thought for a long time that javascript is a horrible language with a wonderful language inside trying to get out.   Coffeescript may well be that language.  While at it’s heart it is still fundamentally javascript, and can be used anywhere javascript can (so far I’ve used it in <a href="http://nodejs.org/">node.js</a> and in the browser), it steers you around the worst mistakes of the underlying language.  Variable scoping and binding is handled better, function declarations are clearer, iterations and comprehensions are integrated neatly into the language, and your code can be more succinct.</p>
+<p>This week I re-wrote our mobile web platform, replacing our existing jquery-ui based rendering with coffeescript and <a href="http://documentcloud.github.com/backbone/">backbone</a>.  There was definitely a learning curve involved, but the effort was worthwhile; and now we have a code base that is considerably more manageable than the previous version.</p>
+<p><strong>Examples</strong></p>
+<pre>l=[1,2,3]
+square = (x) -&gt; x*x
+squares = (square(x) for x in l)</pre>
+<p>Or even</p>
+<pre>squares = (x*x for x in [1,2,3])</pre>
+<p>And from our actual code: we store data as json-encoded strings in the browser’s local storage.  This function takes a <em>predicate</em> (i.e. any function that returns a boolean) and uses it to find the keys of all elements in local storage that match.</p>
+<pre>view : (predicate) -&gt;
+    (key for own key,value of localStorage when predicate (JSON.parse(value))</pre>
+<p>Which could then be used to get all objects that have a field ‘type’ set to ‘response’ as follows:</p>
+<pre>dockeys = view (doc) -&gt; doc.type=='response'</pre>
+<p>Neat, huh?   Head over to <a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a> and try it out yourself!</p>
+
+    </body>
+    </html>
+    

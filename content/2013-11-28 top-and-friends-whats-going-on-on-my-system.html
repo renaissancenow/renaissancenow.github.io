@@ -1,0 +1,54 @@
+
+    <html>
+    <head>
+        <title>‘top’ and friends – what’s going on on my system?</title>
+        <meta name="date" content="2013-11-28" />
+        
+        <meta name="category" content="Technology" />
+        <meta name="tags" content="Technology, Technology_toolkit" />
+        <meta name="author" content="Trevor" />
+        
+    
+    </head>
+    <body>
+        
+<p>Linux gives you all sorts of ways of keeping an eye on what’s going on your server.  Here are several that I find useful.  Read my post on <a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get</a> to get any of these that may not be installed on your computer.</p>
+<p>The grand-daddy of them all is <b>top</b><br/>
+<span id="more-1036"></span><br/>
+This is like Task Manager on Windows or Activity Monitor on Mac.  It gives you a quick list of all the processes that are running on your computer, how much RAM and processor power they’re using, and how long they’ve been running for.</p>
+<p><strong>top</strong>, however has a pretty ugly output format, so it’s good that there are several better alternatives.</p>
+<p>My preferred tool is <code>htop</code>, which gives a better visual display, including a nice bar-chart showing CPU usage on all your cores, and the ability to sort by CPU, memory usage etc.</p>
+<pre><code>
+  CPU[||                                                                          1.3%]     Tasks: 44, 46 thr; 1 running
+  Mem[|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||  332/987MB]     Load average: 0.00 0.01 0.05 
+  Swp[|                                                                       0/1021MB]     Uptime: 1 day, 13:00:40
+
+  PID USER      PRI  NI  VIRT   RES   SHR S CPU% MEM%   TIME+  Command
+24133 trevor     20   0 26420  2756  1456 R  0.7  0.3  0:00.57 htop
+ 1030 root       20   0 91728  4412  3572 S  0.0  0.4  2:21.86 /usr/sbin/vmtoolsd
+ 1051 postgres   20   0  129M  5056  3628 S  0.0  0.5  0:24.74 postgres: writer process
+
+</code></pre>
+<h3>So what’s making my disk thrash?</h3>
+<p><b>htop</b> tells us what processes are using memory and processing power. To see what’s using I/O, use <code>iotop</code>. This needs to be run as root:</p>
+<pre><code>
+$ sudo apt-get install iotop
+$ sudo iotop
+</code></pre>
+<p>which gives you a list of which processes are reading and writing to disk.</p>
+<h3>But what’s using my network connection?</h3>
+<p>Likewise, we can monitor network usage using <code>iftop</code></p>
+<pre><code>
+$ sudo apt-get install iftop
+$ sudo iftop</code></pre>
+<p>which shows the open connections on your machine and how much data is being passed through them.</p>
+<p>An alternative to <code>iftop</code> is <code>nethogs</code> which shows you which processes are responsible for data being passed over your network connections.</p>
+<p>I also find <code>netstat</code> useful in these situations. <code>netstat</code> can do a lot, but one way I find myself using it a lot is</p>
+<pre><code> $ netstat -plnt </code></pre>
+<p>which means ‘show me all the processes on this machine that are listening for TCP/IP connections, and which port they are listening on’. This is very helpful when you’re setting up a machine and you want to verify that, say, your webserver or database server is running correctly.</p>
+<p>Linux gives you many, many ways to see what’s going on on your system, and we’ve only scratched the surface her. Check out the rest of my technology toolkit posts:</p>
+<ul class="lcp_catlist" id="lcp_instance_0"><li><a href="http://renaissancenow.ca/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/" title="What’s in my files?  Heads, tails, cats and more.">What’s in my files?  Heads, tails, cats and more.</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/" title="What are my servers doing?  ping, mtr and nmap">What are my servers doing?  ping, mtr and nmap</a> </li><li class="current"><a href="http://renaissancenow.ca/2013/11/28/top-and-friends-whats-going-on-on-my-system/" title="‘top’ and friends – what’s going on on my system?">‘top’ and friends – what’s going on on my system?</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get: Making your ubuntu machine more better</a> </li></ul>
+
+    </body>
+    </html>
+    

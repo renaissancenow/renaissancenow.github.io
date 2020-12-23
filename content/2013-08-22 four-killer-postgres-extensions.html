@@ -1,0 +1,76 @@
+
+    <html>
+    <head>
+        <title>Four Killer Postgres Extensions</title>
+        <meta name="date" content="2013-08-22" />
+        
+        <meta name="category" content="Technology" />
+        <meta name="tags" content="Technology" />
+        <meta name="author" content="Trevor" />
+        
+    
+    </head>
+    <body>
+        
+<p>I’ve been using the <a href="http://www.postgresql.org/">Postgres</a> database engine for probably 10 years now, and despite having also used Oracle, DB2, Microsoft SQL Server, SQLite, MySQL, Access, FoxPro and others, it’s still by far and away my favourite.</p>
+<p>In all my years of using it, I have never <em>once</em> encountered, or even heard of, an incident of data loss or integrity failure.  It implements the SQL standard rigourously. And whatever I throw at it, it seems to just keep humming along.</p>
+<p>And more than that, it’s extensible.  Here are four extensions that take it from merely being the most solid, reliable relational database engine in existence, to also being an incredible modern application development platform.  And there easy to install and get started with.</p>
+<p><span id="more-991"></span></p>
+<h2><a href="http://www.postgresql.org/docs/9.2/static/uuid-ossp.html">UUID<br/>
+</a></h2>
+<p>Install this by simply typing in <a href="http://www.postgresql.org/docs/9.2/static/app-psql.html">psql</a></p>
+<p><code># CREATE EXTENSION "uuid-ossp";</code></p>
+<p>Since discovering this, I’ve said ‘goodbye’ to <strong>SERIAL</strong> primary keys forever.  Now, my table definitions frequently look like this:</p>
+<pre>CREATE TABLE thing(
+uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+...
+)</pre>
+<p>And there you go, items of type ‘thing’ will now be uniquely identifable GLOBALLY, as well as within his table.  I can backup and restore the database without worrying about getting the serial generated correctly, I can merge data from two sources without worrying about conflicts, and I can use that UUID in other code, or in RESTFUL urls, and always be sure what I’m referring to.</p>
+<h2><a href="http://www.postgresql.org/docs/9.2/static/pgcrypto.html">pgcrypto</a></h2>
+<p>Once again, this can be installed as follows:</p>
+<p><code># CREATE EXTENSION pgcrypto;</code></p>
+<p>and then you can finally get your password management right, and free of all the embarrassing security errors that have plagued some popular sites in recent years.</p>
+<p>I recommend the following structure for a username/password table:</p>
+<pre>CREATE TABLE app_user(
+uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(), -- just as before!
+email text not null,
+hashed_password text not null ,
+UNIQUE (email)
+)</pre>
+<p>And then populate the hashed_password column by using the handy crypt function from pgcrypto</p>
+<p>INSERT INTO app_user (email, hashed_password) VALUES (:email, crypt(:password, gen_salt(‘bf’) ) ) RETURNING uuid;</p>
+<p>Then you can check user credentials like this:</p>
+<p>SELECT EXISTS (SELECT uuid FROM app_user WHERE email=:email AND hashed_password=crypt(:password,hashed_password));</p>
+<p>This has any number of security advantages, and avoids many common pitfalls:</p>
+<ul>
+<li>The algorithm has a tunable speed.  By choosing a salt of type ‘bf’, the algorithm will be many thousands of times more resistant to brute-force attacks than once based on SHA1, and many <em>many</em> thousands more times resistant to one based on MD5 hashing.  See <a href="http://www.postgresql.org/docs/9.2/static/pgcrypto.html#PGCRYPTO-HASH-SPEED-TABLE">here</a> for more in-depth info.</li>
+<li>By creating a new salt for each user, and embedding it in the output hash, the same username/password combination will <em>not</em> result in the same output hash. So even if a malicious attacker had access to this table,  he wouldn’t be able to perform hash lookups in <a href="http://en.wikipedia.org/wiki/Rainbow_table">rainbow tables</a>.  It’s frightening that many sites don’t use this approach yet.</li>
+<li>It’s been very thoroughly tested.  Although I’ve written plenty of crypto code before, I’d always rather use a widely-tested, discussed and understood implementation.  There are so many mistakes that are easy to make and hard to detect in the security world, using a solid open-source library like pgcrypo is just good practice</li>
+</ul>
+<h2><a href="http://www.postgresql.org/docs/9.1/static/hstore.html">Hstore</a></h2>
+<p><code># CREATE EXTENSION hstore;</code></p>
+<p>Hstore allows you to store arbitary key/value pairs in a database column. This is perfect for storing property bags, and in situations where you don’t know at design time exactly what the structure of your data is going to be.</p>
+<p>Let’s extend our user table:</p>
+<pre>CREATE TABLE app_user(
+uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(), -- just as before!
+email text not null,
+hashed_password text not null,
+UNIQUE (email),
+properties hstore
+)</pre>
+<p>Now we can assign arbitrary properties to each user:</p>
+<pre>UPDATE app_user SET properties =  ('twitter_id'=&gt;'sir_tweetsalot', 'comments'=&gt;'some notes here', 'follow_up'=&gt;'1')</pre>
+<p>and then we can use that <code>hstore</code> field as follows:</p>
+<p><code>SELECT * FROM app_user WHERE app_user.properties-&gt;'follow_up'</code></p>
+<p>In fact, with UUID and HStore, Postgres is already looking like a pretty good NoSQL solution, but still with all the traditional SQL benefits of transactional integrity.</p>
+<p> </p>
+<h2><a href="http://pgxn.org/dist/plv8/doc/plv8.html">PLV8</a><a class="thumbnail" href="/images/2013/08/imgres.jpeg"><img alt="imgres" class="alignright size-full wp-image-993" height="181" src="/images/2013/08/imgres.jpeg" width="176"/></a></h2>
+<p>And then finally, plv8.  I’m only beginning to discover how powerful this is, and it really deserves a post of its own.  In brief, PLV8 allows you to write stored procedures in Javascript,  <a href="http://coffeescript.org/">Coffeescript</a> or <a href="http://livescript.net/">LiveScript</a>.</p>
+<p>There are all sorts of things that you could do with this.  Suffice it to say, last month we were pretty proud of ourselves when we wrote our own dialect of <a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">LISP</a>, wrote a parser for it in Coffeescript, and then got the whole thing running <strong>inside</strong> our Postgres database.  Yeah, we were using Lisp on top of Coffeescript to filter SQL records.  That’s how we do things around here!</p>
+<p>And all this is <em>before</em> Postgres formally gets <a href="http://www.postgresql.org/docs/9.3/static/functions-json.html">JSON</a> as a standard data type.  I can’t wait!</p>
+<p> </p>
+<p> </p>
+
+    </body>
+    </html>
+    

@@ -1,0 +1,49 @@
+
+    <html>
+    <head>
+        <title>What are my servers doing?  ping, mtr and nmap</title>
+        <meta name="date" content="2013-11-28" />
+        
+        <meta name="category" content="Technology_toolkit" />
+        <meta name="tags" content="Technology_toolkit" />
+        <meta name="author" content="Trevor" />
+        
+    
+    </head>
+    <body>
+        
+<p>If you’re a network administrator or web developer of any kind, you are often going to want to know what your machines are doing.  Is your database machine connected to the network?  Is your firewall working?  Is your web server properly configured?</p>
+<p><code>ping</code> is the very first tool that we reach for.<br/>
+<span id="more-1051"></span><br/>
+  <code>ping</code> simply sends a message to another machine to see if it is responding.</p>
+<pre><code>$ ping google.com</code></pre>
+<p>When you run this, you should start seeing responses from google.com getting printed out at your command line. If you don’t get this, then your network connection is probably down. This can also be used to see if machines that you own are up and running.</p>
+<pre><code>$ ping mywebserver</code></pre>
+<p>If <code>ping</code> doesn’t work, and you’re sure that you are connected to the network, the next thing to do is to make sure that you have the right machine name and that your client machine can look up its IP address correctly. That’s where <code>dig</code> comes in.</p>
+<pre><code>$ dig mycoolsite.ca </code></pre>
+<p>Check that this gives you the right IP address. Be aware that some DNS providers such as <a href="http://www.opendns.com/">OpenDNS</a> may give you back an IP address even for sites that don’t exist, but it won’t be anything useful.</p>
+<p><code>mtr</code> is like <code>ping</code> on steroids – it will show you all the hops that your network packets are taking between you and your target machine, and how responsive each intermediate machine is being. This is a very handy tool for analysing connectivity problems.</p>
+<h4>My server is up, but what is it doing?</h4>
+<p><code>nmap</code> is a vital tool in every network administrators toolkit. It deserves an article all to itself, but here’s a quick taste:</p>
+<pre><code>trevor@vm2:~$ nmap localhost 
+
+Starting Nmap 6.40 ( http://nmap.org ) at 2013-11-28 18:00 PST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000094s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+5432/tcp open  postgresql
+
+Nmap done: 1 IP address (1 host up) scanned in 0.04 seconds
+</code></pre>
+<p>This tells me that machine <b>vm2</b> is running ssh, a webserver, and the postgresql database engine. If this machine was visible to the outside world, now would be the time when I would make sure that postgresql wasn’t accepting non-local connections.</p>
+<p>As with all these tools, nmap can be installed via</p>
+<pre><code>$ sudo apt-get install nmap</code></pre>
+<p>Find out how to install packages, keep an eye on your Linux system and other useful tips in my technology toolkit posts:</p>
+<ul class="lcp_catlist" id="lcp_instance_0"><li><a href="http://renaissancenow.ca/2013/12/03/whats-in-my-files-heads-tails-cats-and-more/" title="What’s in my files?  Heads, tails, cats and more.">What’s in my files?  Heads, tails, cats and more.</a> </li><li class="current"><a href="http://renaissancenow.ca/2013/11/28/what-are-my-servers-doing-ping-mtr-and-nmap/" title="What are my servers doing?  ping, mtr and nmap">What are my servers doing?  ping, mtr and nmap</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/top-and-friends-whats-going-on-on-my-system/" title="‘top’ and friends – what’s going on on my system?">‘top’ and friends – what’s going on on my system?</a> </li><li><a href="http://renaissancenow.ca/2013/11/28/apt-get-making-your-ubuntu-machine-more-better/" title="apt-get: Making your ubuntu machine more better">apt-get: Making your ubuntu machine more better</a> </li></ul>
+
+    </body>
+    </html>
+    

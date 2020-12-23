@@ -1,0 +1,35 @@
+
+    <html>
+    <head>
+        <title>Lots of Intriguinging Scheme Parentheses.</title>
+        <meta name="date" content="2012-11-08" />
+        
+        <meta name="category" content="Technology" />
+        <meta name="tags" content="Technology" />
+        <meta name="author" content="Trevor" />
+        
+    
+    </head>
+    <body>
+        
+<p>The venerable image manipulation package GIMP still continues to surprise me.</p>
+<p>Version 2.8 was released recently, and it can now run seamlessly on OSX, without the need for XServer.</p>
+<p>One feature I hadn’t explored until yesterday is the built in scripting facilities.  Pretty much anything you can do in GIMP can be scripted and programmed.  This being open source software, there is of course more than one scripting language available.  Python is available via the Python-Fu menu, but the default scripting language is Scheme, a variant of LISP.</p>
+<p><a href="/images/2012/11/scheme.png"><img alt="" class="aligncenter size-large wp-image-624" height="326" sizes="(max-width: 500px) 100vw, 500px" src="/images/2012/11/scheme-1024x669.png" srcset="/images/2012/11/scheme-1024x669.png 1024w, /images/2012/11/scheme-300x196.png 300w, /images/2012/11/scheme-800x523.png 800w, /images/2012/11/scheme.png 1176w" title="scheme" width="500"/></a></p>
+<p>This is my first real adventure into the world of LISP dialects.  It fascinates me how so many language constructs can be made available using only one syntactic structure – the bracket.</p>
+<p>LISP has sometimes been said to stand for ‘Lots of Irritating Silly Parentheses.’</p>
+<p>But I find this fascinating.</p>
+<p>We use brackets for function calls:<code></code></p>
+<pre><code>(myfunction arg1 arg2)</code></pre>
+<p>We use brackets to <em>define</em> functions</p>
+<pre><code>(define (AddXY inX inY) (+ inX inY) )</code></pre>
+<p>and we even use brackets to manage the scope of variables</p>
+<pre><code>(let* ( (a 1) (b 2) ) (AddXY a b))</code></pre>
+<p>Which evaluates to ‘3’.</p>
+<p>In any other language I’ve used, such as C, or Python, or Javascript, those three different semantic constructs would use three different syntactic structures – curly brackets, keywords, indentation etc.</p>
+<p>I can see why people find LISP and Scheme hard to fathom, but it has a certain elegance that appeals to me.</p>
+<p> </p>
+
+    </body>
+    </html>
+    
